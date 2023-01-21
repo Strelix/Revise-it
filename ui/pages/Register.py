@@ -3,7 +3,7 @@ from PIL import ImageTk, Image
 from customtkinter import LEFT, RIGHT, TOP, BOTTOM
 
 VIEW = False
-
+#
 
 class RegisterMain:
     def __init__(self, main):
