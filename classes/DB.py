@@ -5,6 +5,7 @@ import mariadb
 
 class Database:
     def __init__(self):
+        self.connection: mariadb.connect = None
         try:
             self.connection = mariadb.connect(user='root',
                                               database='revise_it',
@@ -73,3 +74,9 @@ class Database:
 
     def get_user_from_name(self, username):
         return self.__get_execute_params('SELECT * FROM users WHERE username = ?', username)
+
+    def get_cards_from_id(self, card_id):
+        return self.__get_execute_params('SELECT * FROM flashcards WHERE id = ?', card_id)
+
+    def get_cards_from_user_id(self, user_id):
+        return self.__get_execute_params('SELECT * FROM flashcards WHERE user_id = ?', user_id)

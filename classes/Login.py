@@ -63,7 +63,6 @@ class Login:
         info = self.__get_info_by_username(username)
         print(info)
         if info is not None:
-            info = json.load(info)
             if hashlib.sha256(pin.encode()).hexdigest() == info[3] and username == info[1]:
                 self.logged_in = True
                 self.username = username
@@ -92,3 +91,9 @@ class Login:
         hashed_pin = hashlib.sha256(pin.encode()).hexdigest()
         self.DB.append_user(username, hashed_pin)
         return True, f'Created user with the username of {username}! Please press below to login with this account.'
+
+    def get_flashcards(self):
+        if self.logged_in:
+            res = self.DB.get_cards_from_user_id(self.user_id)
+            return 1, res
+        return False, 'Not logged in'

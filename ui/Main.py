@@ -4,6 +4,7 @@ from PIL import ImageTk, Image
 from ui.pages import Login
 from ui.pages import Profile
 from ui.pages import Register
+from ui.pages import Cards
 
 from customtkinter import LEFT, RIGHT, TOP, BOTTOM
 
@@ -23,26 +24,36 @@ pages = {
     'register': {
         "login": False,
         "admin": False
+    },
+    'cards': {
+        "login": True,
+        "admin": False
     }
 }
 
 
 class Main:
     def __init__(self, main):
+        self.settings = None
+        self.cards = None
+        self.register = None
+        self.profile = None
+        self.login = None
         self.main_screen = main
+        self.LOGIN = main.LOGIN
         # self.
 
         self.TKMore: Main = TKMoreClass.TKMore()
         self.items: list = []
         self.theme: int = 0
 
-        self.container: object = customtkinter.CTkFrame(master=main, width=main.screensize[0] - 100,
+        self.container = customtkinter.CTkFrame(master=main, width=main.screensize[0] - 100,
                                                         height=main.screensize[1] - 120,
                                                         corner_radius=20)
         self.container.pack(padx=15, pady=15)
         self.container.pack_propagate(False)
 
-        self.heading: object = customtkinter.CTkLabel(master=self.container, text=' ',
+        self.heading = customtkinter.CTkLabel(master=self.container, text=' ',
                                                       text_font=('FredokaOne', '15', 'bold'))
         self.heading.pack(side=TOP, pady=15)
 
@@ -67,10 +78,10 @@ class Main:
         else:
             if pages[page]:
                 page_details = pages[page]
-                if page_details["login"] == True:
+                if page_details["login"]:
                     if not self.main_screen.LOGIN.logged_in:
                         return self.main_screen.popup.show_popup('Please login to go to this page.', 2, 'ERROR', 'red')
-                elif page_details["login"] == False:
+                elif not page_details["login"]:
                     if self.main_screen.LOGIN.logged_in:
                         return self.main_screen.popup.show_popup('You can\'t view this page while logged in.', 2, 'ERROR', 'red')
 
@@ -96,11 +107,8 @@ class Main:
             if self.main_screen.LOGIN.logged_in:
                 self.profile = Profile.ProfileMain(self)
 
-        if page == 'staff':
-            self.staff = Staff.StaffMain(self)
-
-        if page == ' hack':
-            self.hack = Hack.HackMain(self)
+        if page == 'cards':
+            self.cards = Cards.CardsMain(self)
 
         if page == 'settings':
             self.settings = Settings.SettingsMain(self)

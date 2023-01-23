@@ -10,14 +10,14 @@ class LeftBar:
         self.container.pack(side=LEFT, padx=15, pady=15)
         self.container.pack_propagate(False)
 
-        self.staff = customtkinter.CTkButton(master=self.container, hover_color='#333333', fg_color='#222222', width=75,
+        self.cards = customtkinter.CTkButton(master=self.container, hover_color='#333333', fg_color='#222222', width=75,
                                              height=75, text='')
-        self.staff.pack(side=TOP, padx=15, pady=15)
-        self.staff.propagate(False)
+        self.cards.pack(side=TOP, padx=15, pady=15)
+        self.cards.propagate(False)
 
         staff = ImageTk.PhotoImage(file='./assets/images/Staff.png')
         login = None
-        self.staff.configure(image=staff, corner_radius=20, command=lambda: main.main.change_page('staff'))
+        self.cards.configure(image=staff, corner_radius=20, command=lambda: main.main.change_page('cards'))
         # self.staff_image = customtkinter.CTkButton(
         #     master=self.staff, image=staff, text='', fg_color='#222222', corner_radius=20)
         # self.staff_image.pack(padx=5, pady=15)
