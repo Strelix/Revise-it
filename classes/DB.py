@@ -80,3 +80,6 @@ class Database:
 
     def get_cards_from_user_id(self, user_id):
         return self.__get_execute_params('SELECT * FROM flashcards WHERE user_id = ?', user_id)
+
+    def create_set(self, user_id, name, description):
+        return self.__execute_params('INSERT INTO `flashcards` (user_id, name, description) VALUES (?, ? , ?)', user_id, name, description)

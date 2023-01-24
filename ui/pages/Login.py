@@ -20,6 +20,7 @@ class LoginMain:
             self.login_username_field = customtkinter.CTkEntry(master=self.username_container)
             self.login_username_text.pack(side=LEFT)
             self.login_username_field.pack(side=RIGHT, padx=(0, 30))
+            self.login_username_field.focus()
 
             self.pin_container = customtkinter.CTkFrame(master=main.container,
                                                         width=main.main_screen.screensize[0] * 0.3,
